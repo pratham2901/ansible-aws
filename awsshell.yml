@@ -1,0 +1,12 @@
+--- # AWS EC2 Example
+- hosts: aws
+  remote_user: ec2-user
+  become_method: sudo
+  gather_facts: yes
+  connection: ssh
+  tasks:
+  - name: Execute a shell commmand
+    shell: ls -al ~
+    register: result
+  - name: Display the result in JSON format
+    debug: var=result 
