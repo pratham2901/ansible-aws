@@ -1,4 +1,4 @@
---- # EC2 - Start/Stop/Terminate
+--- #EC2 module provisioning example
 - hosts: localhost
   connection: local
   remote_user: test
@@ -7,10 +7,13 @@
   vars_files: 
   - files/awscreds.yml
   tasks:
-  - name: Manage the state of the instance
+  - name: More advanced  provisioning of two t2.micro EC2 Instances
     ec2:
       aws_access_key: "{{ aws_id }}"
       aws_secret_key: "{{ aws_key }}"
       region: "{{ aws_region }}"
-      instance_ids: i-0cbce0e631c0f885d 
-      state: stopped 
+      image: ami-a4c7edb2
+      instance_type: t2.micro
+      count: 2 
+      vpc_subnet_id: subnet-87de8dce
+      assign_public_ip: yes
